@@ -1,0 +1,23 @@
+{
+  "name": "10m_won",
+  "version": "1.0.0",
+  "description": "10m project news display",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Suchacoolguy/10M_won.git"
+  },
+  "author": "Suchacoolguy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Suchacoolguy/10M_won/issues"
+  },
+  "homepage": "https://github.com/Suchacoolguy/10M_won#readme",
+  "devDependencies": {
+    "electron": "^27.0.2"
+  }
+}
