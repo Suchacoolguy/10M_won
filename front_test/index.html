@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./miandisplay.css">
+    <link rel="stylesheet" href="./setting.css">
+
+</head>
+<body>
+    <div class="head-section">
+        <div class="clock-item">clock(css: item)</div>
+        <div class="item" onclick="setting()">setting(css: item)</div>
+    </div>
+    <div class="main-section">
+        <div class="item">Logo(css: item)</div>
+        <div class="item">news headline(css: item)</div>
+        <div class="item">QR(css: item)</div>
+        <div class="newscontent-item">news content(css: newscontent-item)</div>
+    </div>
+    <div class="foot-section">
+        <div class="social-item">학생복지/ 생활 복지 정보 </div>
+        <div class="item">slide-bar (css: item)</div>
+    </div>
+
+    <div class="setting-section">
+        <div class="select-menu">
+            <div class="menu-item" onclick="showMenu('world-time')">world time</div>
+            <div class="menu-item" onclick="showMenu('user-info')">user info</div>
+            <div class="menu-item" onclick="showMenu('category')">category</div>
+            <div class="menu-item" onclick="showMenu('bright')">bright</div>
+        </div>
+        <div class="menu-main">
+            <div id="world-time" class="content">World Time Content</div>
+            <div id="user-info" class="content">User Info Content</div>
+            <div id="category" class="content">Category Content</div>
+            <div id="bright" class="content">Brightness Setting</div>
+        </div>
+    </div>
+
+</body>
+    <script src="./func.js"></script>
+</html>

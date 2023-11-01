@@ -1,0 +1,36 @@
+.setting-section {
+    display: none;
+    grid-row: 2 / 4;
+    background-color: yellow; /* main-section과 같은 배경색으로 설정 */
+    padding: 10px;
+    grid-template-rows: 1fr 3fr;
+}
+
+.select-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    background-color: black;
+    opacity: 0;  /* 초기 투명도를 0 (완전 투명)으로 설정 */
+    transition: opacity 0.5s ease-in-out;  /* 0.5초 동안 투명도가 변하도록 설정 */
+}
+
+.setting-section[style*="grid"] .select-menu {
+    opacity: 1;  /* .setting-section이 grid로 표시될 때 .select-menu의 투명도를 1로 변경 */
+}
+
+.menu-item{
+    
+    padding: 5px;
+    background-color: white;
+}
+
+
+.menu-main{
+    background-color: blue;
+}
+
+.content {
+    display: none;
+}
