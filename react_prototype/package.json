@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "electron": "^27.0.3"
+  },
+  "start": "PUBLIC_URL=./ npm start"
+}
