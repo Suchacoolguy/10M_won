@@ -40,7 +40,7 @@
       "buildResources": "assets"
     }
   },
-    "browser": {
+  "browser": {
     "fs": false,
     "os": false,
     "path": false
