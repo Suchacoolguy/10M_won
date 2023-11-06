@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Suchacoolguy/10M_won#readme",
   "devDependencies": {
     "electron": "^27.0.2"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.3"
   }
 }
