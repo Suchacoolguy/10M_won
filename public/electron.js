@@ -31,10 +31,11 @@ app.whenReady().then(() => {
     return 1;
   });
 
-  CalNews();
-
+  
   createWindow();
-
+  
+  CalNews();
+  
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -67,7 +68,6 @@ function newsUpdate() {
 }
 
 async function CalNews() {
-  
   try {
     let feed = await parser.parseURL(
       "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko"
