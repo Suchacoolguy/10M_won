@@ -2,10 +2,14 @@
   "name": "10m_won",
   "version": "1.0.0",
   "description": "10m project news display",
-  "main": "main.js",
+  "main": "public/electron.js",
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react:start": "react-scripts start",
+    "electron:start": "wait-on http://localhost:3000 && mode=dev electron .",
+    "start": "concurrently \"npm run react:start\" \"npm run electron:start\"",
+    "react:build": "react-scripts build",
+    "build": "npm run react:build && electron-builder -c.snap.publish=github --publish=always"
   },
   "repository": {
     "type": "git",
@@ -16,8 +20,46 @@
   "bugs": {
     "url": "https://github.com/Suchacoolguy/10M_won/issues"
   },
-  "homepage": "https://github.com/Suchacoolguy/10M_won#readme",
+  "homepage": "./",
   "devDependencies": {
-    "electron": "^27.0.2"
+    "concurrently": "^8.2.2",
+    "electron": "^27.0.2",
+    "electron-builder": "^24.6.4",
+    "react": "^18.2.0",
+    "react-do": "^1.1.6",
+    "react-scripts": "^5.0.1",
+    "wait-on": "^7.1.0"
+  },
+  "build": {
+    "appId": "com.example.electron-app",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
+  },
+    "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "react-dom": "^18.2.0",
+    "react-native-rss-parser": "^1.5.1",
+    "timers": "^0.1.1"
   }
 }
