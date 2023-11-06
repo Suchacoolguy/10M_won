@@ -41,7 +41,7 @@
       "buildResources": "assets"
     }
   },
-    "browser": {
+  "browser": {
     "fs": false,
     "os": false,
     "path": false
@@ -61,6 +61,7 @@
   "dependencies": {
     "react-dom": "^18.2.0",
     "react-native-rss-parser": "^1.5.1",
+    "rss-parser": "^3.13.0",
     "timers": "^0.1.1"
   }
 }

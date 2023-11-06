@@ -31,6 +31,8 @@ app.whenReady().then(() => {
     return 1;
   });
 
+  CalNews();
+
   createWindow();
 
   app.on("activate", () => {
@@ -45,3 +47,34 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+let Parser = require("rss-parser");
+let parser = new Parser();
+
+(async () => {
+  let feed = await parser.parseURL("url");
+  window.webContents.send("news:load", feed);
+  console.log(feed.title);
+})();
+
+function newsUpdate() {
+  let now = new Date();
+  let time = 1000 * 60 * 60;
+  let start = time - (now.getMinutes() * 60 + now.getSeconds()) * 1000 + now.getMilliseconds();
+  setInterval(function reload() {
+    setTimeout(reload, time);
+  }, start);
+}
+
+async function CalNews() {
+  
+  try {
+    let feed = await parser.parseURL(
+      "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko"
+    );
+    console.log(feed);
+    window.webContents.send("news:load", feed);
+  } catch (e) {
+    console.error(e);
+  }
+}
