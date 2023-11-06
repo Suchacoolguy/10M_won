@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body, ul, li, button, div {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            display: grid;
+            grid-template-rows: 1fr 2fr 1fr; /* 파란색, 노란색, 초록색 도형의 비율에 맞게 설정 */
+            height: 100vh; /* 높이를 전체 화면으로 설정 */
+            gap: 10px; /* 간격 설정 */
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* -------------------------------------------------------- */
+
+        /* 화면 상단 설정 */
+        .head-section {
+            background-color: lightblue;
+            display: grid;
+            /* justify-content: space-between; */
+            grid-template-columns: 4fr 1fr;
+            grid-column-gap: 10px;
+            align-items: center;
+            padding: 10px;
+        }
+        .clock-item{
+            display: flex;
+            justify-content: baseline;
+            align-items: center;
+            background-color: beige;
+            text-align: start;
+            height: 100%;
+
+        }
+        /* ----------------------------------------------------------- */
+
+
+        /* ----------------------------------------------------------- */
+        /* 화면 중간 설정 */
+        .main-section {
+            background-color: yellow;
+            display: grid;
+            grid-template-columns: 1fr 4fr 1fr; 
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .newscontent-item{
+            background-color: aqua;
+            grid-row: 2 / 4; 
+            grid-column: 1 / 4;
+        }
+
+        /* ------------------------------------------------------------- */
+
+
+        /* ------------------------------------------------------------- */
+
+        /* 화면 하단 설정 */
+        .foot-section {
+            background-color: lightgreen;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        /* 회색 도형 설정 */
+        .item {
+            background-color: grey;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .social-item{
+            display: flex;
+            justify-content: baseline;
+            align-items: center;
+            width: 90%;
+            background-color: antiquewhite;
+        }
+
+         /* ------------------------------------------------------------- */
+
+         button {
+            padding: 10px 20px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        #menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #menu li {
+            padding: 10px 20px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        #menu li:last-child {
+            border-bottom: none;
+        }
+
+        #menu li:hover {
+            background-color: #f5f5f5;
+        }
+
+        .content-div {
+            display: none;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .menu-content {
+            display: none;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head-section">
+        <div class="clock-item">clock(css: item)</div>
+        <!-- setting 버튼을 toggleButton으로 변경 -->
+        <button id="toggleButton" class="item">setting</button>
+    </div>
+    <div class="main-section">
+        <div class="item">Logo(css: item)</div>
+        <div class="item">news headline(css: item)</div>
+        <div class="item">QR(css: item)</div>
+        <div class="newscontent-item">news content(css: newscontent-item)</div>
+    </div>
+    <div class="foot-section">
+        <div class="social-item">학생복지/ 생활 복지 정보 </div>
+        <div class="item">slide-bar (css: item)</div>
+    </div>
+
+    <!-- 토글 메뉴 -->
+    <ul id="menu">
+        <li data-target="menu1-content">Menu 1</li>
+        <li data-target="menu2-content">Menu 2</li>
+        <li data-target="menu3-content">Menu 3</li>
+        <li data-target="menu4-content">Menu 4</li>
+    </ul>
+    
+    <div id="menu1-content" class="menu-content">
+        This is the content for Menu 1.
+        <button class="apply-button">적용하기</button>
+    </div>
+    <div id="menu2-content" class="menu-content">
+        This is the content for Menu 2.
+        <button class="apply-button">적용하기</button>
+    </div>
+    <div id="menu3-content" class="menu-content">
+        This is the content for Menu 3.
+        <button class="apply-button">적용하기</button>
+    </div>
+    <div id="menu4-content" class="menu-content">
+        This is the content for Menu 4.
+        <button class="apply-button">적용하기</button>
+    </div>
+
+
+    <script>
+        const button = document.getElementById('toggleButton');
+    const menu = document.getElementById('menu');
+    const contents = document.querySelectorAll('.menu-content');
+    const applyButtons = document.querySelectorAll('.apply-button');
+    const mainSection = document.querySelector('.main-section'); // main-section 선택자 추가
+    const footSection = document.querySelector('.foot-section'); // foot-section 선택자 추가
+
+    button.addEventListener('click', function() {
+        const rect = button.getBoundingClientRect();
+        menu.style.top = `${rect.bottom}px`;
+        menu.style.left = `${rect.left}px`;
+
+        if (menu.style.display === 'none' || menu.style.display === '') {
+            menu.style.display = 'block';
+        } else {
+            menu.style.display = 'none';
+        }
+    });
+
+    menu.addEventListener('click', function(event) {
+        if (event.target.tagName === 'LI') {
+            const targetId = event.target.getAttribute('data-target');
+            contents.forEach(content => content.style.display = 'none'); // 모든 컨텐츠를 숨깁니다.
+            
+            mainSection.style.display = 'none'; // .main-section 숨김
+            footSection.style.display = 'none'; // .foot-section 숨김
+            document.getElementById(targetId).style.display = 'block'; // 클릭한 메뉴에 해당하는 컨텐츠를 보여줍니다.
+            menu.style.display = 'none';
+        }
+    });
+
+    applyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            contents.forEach(content => content.style.display = 'none'); // 모든 메뉴 컨텐츠를 숨깁니다.
+            mainSection.style.display = 'block'; // 기존 화면을 다시 보여줍니다.
+            footSection.style.display = 'block'; // 기존 화면을 다시 보여줍니다.
+        });
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Div Example</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        #div2 {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            display: none;  /* 초기에 div2는 숨김 상태 */
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="div1">This is div1</div>
+<div id="div2">This is div2</div>
+
+<button onclick="toggleDivs()">Toggle Divs</button>
+
+<script>
+    function toggleDivs() {
+        let div1 = document.getElementById('div1');
+        let div2 = document.getElementById('div2');
+
+        // div1이 현재 보이는 상태라면 숨기고 div2를 보이게 함. 그렇지 않다면 반대로 처리.
+        if (div1.style.display === "none") {
+            div1.style.display = "block";
+            div2.style.display = "none";
+        } else {
+            div1.style.display = "none";
+            div2.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
