@@ -31,11 +31,13 @@ app.whenReady().then(() => {
     return 1;
   });
 
-  
+  ipcMain.handle("news", () => {
+    console.log("invoke Accept");
+    return CalNews();
+  });
+
   createWindow();
-  
-  CalNews();
-  
+
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -73,7 +75,8 @@ async function CalNews() {
       "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko"
     );
     console.log(feed);
-    window.webContents.send("news:load", feed);
+    return feed
+    // window.webContents.send("news:load", feed);
   } catch (e) {
     console.error(e);
   }

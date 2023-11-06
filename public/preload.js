@@ -9,7 +9,7 @@ const ipc = {
     // 메인에서 렌더
     receive: ["receive", "news:load", "news:update", "timezone:update"],
     // 렌더에서 메인 후 다시 렌더
-    sendReceive: ["sendReceive", "setting:change"],
+    sendReceive: ["sendReceive", "news", "setting:change"],
   },
 };
 

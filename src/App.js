@@ -9,7 +9,7 @@ export default function App() {
       <h1>Hello, world!</h1>
       <Send />
       <Invoke />
-      <Receive />
+      <News />
     </>
   );
 }
@@ -24,17 +24,45 @@ function Send() {
 }
 
 function Invoke() {
-  return <button onClick={() => window.ipcRender.invoke("sendReceive").then((data) => {
-    console.log(data)
-  })}>Invoke</button>;
+  return (
+    <button
+      onClick={() =>
+        window.ipcRender.invoke("sendReceive").then((data) => {
+          console.log(data);
+        })
+      }
+    >
+      Invoke
+    </button>
+  );
 }
 
-function Receive() {
-  return <button onClick={() => window.ipcRender.receive("news:load", (data) => {
-      data.items.forEach((item) => {
-    console.log(item.title + ":" + item.link);
-  });
-  })}></button>
+// function Receive() {
+//   return (
+//     <button
+//       onClick={() =>
+//         window.ipcRender.receive("news:load", (data) => {
+//           data.items.forEach((item) => {
+//             console.log(item.title + ":" + item.link);
+//           });
+//         })
+//       }
+//     ></button>
+//   );
+// }
+
+function News() {
+  return (
+    <button
+      onClick={() =>
+        window.ipcRender.invoke("news").then((data) => {
+          console.log(data);
+        })
+      }
+    >
+      NEWS
+    </button>
+  );
 }
 
 // function Google() {
@@ -45,4 +73,3 @@ function Receive() {
 //   });
 // }
 const url = "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko";
-
