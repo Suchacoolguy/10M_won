@@ -1,14 +1,15 @@
 const contextBridge = require("electron").contextBridge;
 const ipcRenderer = require("electron").ipcRenderer;
+// window.ipcRenderer = require('electron').ipcRenderer;
 
 const ipc = {
   render: {
     // 렌더에서 메인
-    send: [],
+    send: ["send", "setting:save"],
     // 메인에서 렌더
-    receive: [],
+    receive: ["receive", "news:load", "news:update", "timezone:update"],
     // 렌더에서 메인 후 다시 렌더
-    sendReceive: [],
+    sendReceive: ["sendReceive", "setting:change"],
   },
 };
 
@@ -39,3 +40,4 @@ contextBridge.exposeInMainWorld(
     },
   }
 );
+
