@@ -28,38 +28,33 @@ function showMenu(menuId) {
     selectedContent.style.display = "block"; // 선택된 메뉴의 내용만 보여줍니다.
 }
 
-// func.js
 
-// function setting() {
-//     const settingSection = document.querySelector('.setting-section');
-//     const selectMenu = document.querySelector('.select-menu');
+function updateTime() {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = now.getMonth() + 1; // 월은 0부터 시작하기 때문에 +1을 해줍니다.
+    let date = now.getDate();
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
     
-//     if (selectMenu.style.display === 'none' || selectMenu.style.display === '') {
-//         selectMenu.style.display = 'flex';
-//     } else {
-//         selectMenu.style.display = 'none';
-//     }
-// }
+    // 10보다 작은 숫자 앞에 0을 추가합니다.
+    month = month < 10 ? '0' + month : month;
+    date = date < 10 ? '0' + date : date;
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
 
-// function showMenu(menuId) {
-//     const menuContent = document.getElementById(menuId);
-//     const settingSection = document.querySelector('.setting-section');
-//     const selectMenu = document.querySelector('.select-menu');
-    
-//     // Hide all other menu content
-//     document.querySelectorAll('.content').forEach(content => content.style.display = 'none');
-    
-//     // Show the selected menu content
-//     menuContent.style.display = 'block';
-//     settingSection.style.display = 'grid';
+    // 포맷에 맞게 문자열로 만듭니다.
+    let timeString = `${year}년 ${month}월 ${date}일 |  ${hours}:${minutes}:${seconds}`;
 
-//     // Hide the toggle menu
-//     selectMenu.style.display = 'none';
-// }
+    // HTML에 표시합니다.
+    document.getElementById('clock').innerText = timeString;
 
-// function applyChanges() {
-//     const settingSection = document.querySelector('.setting-section');
-    
-//     // Hide the setting section
-//     settingSection.style.display = 'none';
-// }
+    // 1분마다 업데이트 합니다.
+    setTimeout(updateTime, 1000);
+}
+
+// 웹페이지 로딩시 함수를 호출하여 시간을 표시합니다.
+updateTime();
+

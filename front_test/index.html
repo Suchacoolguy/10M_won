@@ -10,18 +10,19 @@
 </head>
 <body>
     <div class="head-section">
-        <div class="clock-item">clock(css: item)</div>
-        <div class="item" onclick="setting()">setting(css: item)</div>
+        <div id="clock"></div>
+        <div class="item" onclick="setting()"><img src="/imgs/settings.png" alt=""></div>
     </div>
     <div class="main-section">
-        <div class="item logo">
-                <img src="/testest/newslogo/CNN.jpg" alt="">
+        <div class="newscontent-head">
+            <div class="item logo">
+                    <img src="./newslogo/CNN.jpg" alt="">
+            </div>
+            <div class="item"><p>Indonesian Hospital's main generator in northern Gaza is out of service, director says</p></div>
+            <div class="item"><img src="./imgs/LCaShG_qrcode.png" alt=""></div>
         </div>
-        <div class="item"><h1>40억짜리 장난감…만화영화 속 `건담`이 현실로</h2></div>
-        <div class="item">QR(css: item)</div>
-        <div class="newscontent-item">news content(css: newscontent-item) <h2>건담 만화영화를 보며 자란 이들의 공상이 현실이 됐다. 키 4.5미터, 무게 3.5톤에 달하는 로봇의 조종석에 올라타서 원하는 동작을 하도록 조종할 수 있다. 로봇은 자동차로 변신해서 가고 싶은 곳으로 자유롭게 이동도 할 수 있다. 다만 비싼 가격이 흠이다.
-
-            30일(현지시간) 온라인 기술매체 더버지는 일본 요코하마에 본사를 둔 로봇 스타트업 츠바메인더스트리가 개발한 300만달러(약 40억원) 짜리 대형 로봇 '츠바메 아칵스(Tsubame Archax)'를 조명했다. 이 로봇은 최근 일본에서 열린 '재팬 모빌리티 쇼'에 선보였다.</h2></div>
+        <div class="newscontent-item">news content(css: newscontent-item)
+            <p>Gaza's hospitals are struggling to treat severely injured patients due to a lack of medical supplies and dire conditions, aid workers say. The head of a key medical facility in the north of the strip said its main generator has gone out of service. And Israeli airstrikes in the vicinity of the Al Quds hospital in Gaza City have continued into Thursday, its director told CNN, as the Israeli military urged civilians to move south.</p></div>
     </div>
     <div class="foot-section">
         <div id="slider">
@@ -34,17 +35,20 @@
                     <div class="inner">
                         <div class="slide">
                             <div class="slide-content">
-                                <p>복지부 "간호대 입학정원 한시적 확대..연말까지 증원규모 결정"</p>
+                                <p id="01_1">[보건복지부 - 청년] 청년내일저축계좌</p>
+                                <p id="01_2">근로빈곤층 청년의 생계수급자 등으로의 하락을 사전에 예방하고자 시행</p>
                             </div>
                         </div>
                         <div class="slide">
                             <div class="slide-content">
-                                <p>222</p>
+                                <p id="02_1">[보건복지부 - 청년] 청년내일저축계좌</p>
+                                <p id="02_2">근로빈곤층 청년의 생계수급자 등으로의 하락을 사전에 예방하고자 시행</p>
                             </div>
                         </div>
                         <div class="slide">
                             <div class="slide-content">
-                                <p>333</p>
+                                <p id="03_1">[학적] 2023-2학기 공학교육인증 변경 신청 안내</p>
+                                <p id="03_2">[대학원] 2024학년도 전기 대학원별(일반, 산업, 교육 및 컨설팅) 신입생 모집 및 원서접수 안내</p>
                             </div>
                         </div>
                     </div>
@@ -66,10 +70,40 @@
             <div class="menu-item" onclick="showMenu('bright')">bright</div>
         </div>
         <div class="menu-main">
-            <div id="world-time" class="content">World Time Content</div>
-            <div id="user-info" class="content">User Info Content</div>
-            <div id="category" class="content">Category Content</div>
-            <div id="bright" class="content">Brightness Setting</div>
+            <div id="world-time" class="content world-time">
+                <div class="world-time">
+                    <button>서울(UTC+09)</button>
+                    <button>뉴욕(UTC-04)</button>
+                    <button>도쿄(UTC+09)</button>
+                    <button>런던(UTC+01)</button>
+                </div>
+            </div>
+            <div id="user-info" class="content">
+                <div class="user-info">
+                    <div class="user-type">학생<img src="./imgs/student.png" alt=""></div>
+                    <div class="user-type">일반인<img src="./imgs/normal.png" alt=""></div>
+                </div>
+            </div>
+            <div id="category" class="content">
+                <div class="category">
+                    <button>MOST</button>
+                    <button>WORLD</button>
+                    <button>ECONOMY</button>
+                    <button>TECHNOLOGY</button>
+                </div>
+            </div>
+            <div id="bright" class="content">
+                <div class="bright-bar">
+                    <input
+                id="brightness-setter"
+                type="range"
+                value="128"
+                min="15"
+                max="255"
+                name="brightness"
+              />
+                </div>
+            </div>
         </div>
     </div>
 
