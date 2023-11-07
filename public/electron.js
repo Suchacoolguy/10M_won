@@ -1,5 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const NewsAPI = require("newsapi");
+const Config = require("../apiKey.js")
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -22,18 +24,21 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
+
   ipcMain.on("send", () => {
     console.log("send Complete");
   });
 
   ipcMain.handle("sendReceive", () => {
     console.log("invoke Accept");
-    return 1;
+    return "ABC";
   });
 
-  ipcMain.handle("news", () => {
+  ipcMain.handle("news", async () => {
     console.log("invoke Accept");
-    return CalNews();
+    const result = await CalNews();
+    console.log(result)
+    return result;
   });
 
   createWindow();
@@ -69,15 +74,25 @@ function newsUpdate() {
   }, start);
 }
 
-async function CalNews() {
+function CalNews() {
+  // try {
+  //   let feed = await parser.parseURL(
+  //     "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko"
+  //   );
+  //   console.log(feed);
+  //   return feed;
+  //   // window.webContents.send("news:load", feed);
+  // } catch (e) {
+  //   console.error(e);
+  // }
   try {
-    let feed = await parser.parseURL(
-      "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko"
-    );
-    console.log(feed);
-    return feed
-    // window.webContents.send("news:load", feed);
-  } catch (e) {
+    const newsapi = new NewsAPI(Config.key);
+    return newsapi.v2
+      .topHeadlines({
+        sources: "bbc-news,the-verge",
+        language: "en",
+      })
+  } catch (error) {
     console.error(e);
   }
 }
