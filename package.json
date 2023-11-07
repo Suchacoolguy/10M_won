@@ -60,8 +60,7 @@
   "dependencies": {
     "newsapi": "^2.4.1",
     "react-dom": "^18.2.0",
-    "react-native-rss-parser": "^1.5.1",
-    "rss-parser": "^3.13.0",
+    "react-qr-code": "^2.0.12",
     "timers": "^0.1.1"
   }
 }

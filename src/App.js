@@ -1,4 +1,5 @@
 import { useState } from "react";
+import QRCode from "react-qr-code";
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <div>
         <h2 id="title"></h2>
         <h3 id="description"></h3>
+        <div id="qrcode" />
       </div>
       <CategoryBtn />
       <Send />
@@ -40,11 +42,15 @@ function Invoke() {
 }
 
 function LoadNews(arg) {
-  console.log();
   window.ipcRender.invoke("news", arg).then((data) => {
-    document.getElementById("title").innerText = data.articles[0].title;
-    document.getElementById("description").innerText = data.articles[0].description;
+    console.log(data);
+    document.getElementById("title").innerText = data.articles[1].title;
+    document.getElementById("description").innerText = data.articles[1].description;
   });
+}
+
+function GenerateQR(url) {
+  return <QRCode value={url}></QRCode>;
 }
 
 function CategoryBtn() {
