@@ -34,10 +34,10 @@ app.whenReady().then(() => {
     return "ABC";
   });
 
-  ipcMain.handle("news", async () => {
+  ipcMain.handle("news", async (event, content) => {
     console.log("invoke Accept");
-    const result = await CalNews();
-    console.log(result)
+    const result = await CalNews(content);
+    // console.log(result)
     return result;
   });
 
@@ -74,7 +74,7 @@ function newsUpdate() {
   }, start);
 }
 
-function CalNews() {
+function CalNews(category) {
   // try {
   //   let feed = await parser.parseURL(
   //     "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko"
@@ -86,12 +86,13 @@ function CalNews() {
   //   console.error(e);
   // }
   try {
+    console.log("***********************" + category)
     const newsapi = new NewsAPI(Config.key);
-    return newsapi.v2
-      .topHeadlines({
-        sources: "bbc-news,the-verge",
-        language: "en",
-      })
+    return newsapi.v2.topHeadlines({
+      // sources: "bbc-news,the-verge",
+      category: (category == null)?"" : category,
+      language: "en",
+    });
   } catch (error) {
     console.error(e);
   }

@@ -1,15 +1,17 @@
 import { useState } from "react";
-import { saveSetting, readSetting } from "./saveHandler.js";
-
-import * as rssParser from "react-native-rss-parser";
 
 export default function App() {
   return (
     <>
+      <LoadNews />
       <h1>Hello, world!</h1>
+      <div>
+        <h2 id="title"></h2>
+        <h3 id="description"></h3>
+      </div>
+      <CategoryBtn />
       <Send />
       <Invoke />
-      <News />
     </>
   );
 }
@@ -37,39 +39,24 @@ function Invoke() {
   );
 }
 
-// function Receive() {
-//   return (
-//     <button
-//       onClick={() =>
-//         window.ipcRender.receive("news:load", (data) => {
-//           data.items.forEach((item) => {
-//             console.log(item.title + ":" + item.link);
-//           });
-//         })
-//       }
-//     ></button>
-//   );
-// }
-
-function News() {
-  return (
-    <button
-      onClick={() =>
-        window.ipcRender.invoke("news").then((data) => {
-          console.log(data);
-        })
-      }
-    >
-      NEWS
-    </button>
-  );
+function LoadNews(arg) {
+  console.log();
+  window.ipcRender.invoke("news", arg).then((data) => {
+    document.getElementById("title").innerText = data.articles[0].title;
+    document.getElementById("description").innerText = data.articles[0].description;
+  });
 }
 
-// function Google() {
-//   const feed = await Parser.parseURL(url);
-
-//   feed.items.array.forEach(element => {
-//     console.log(element.title);
-//   });
-// }
-const url = "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko";
+function CategoryBtn() {
+  const categories = ["business", "entertainment", "general", "health", "science", "sports", "technology"];
+  console.log(categories);
+  return (
+    <div>
+      <button onClick={() => LoadNews(categories[0])}>Business</button>
+      <button onClick={() => LoadNews(categories[1])}>entertainment</button>
+      <button onClick={() => LoadNews(categories[2])}>general</button>
+      <button onClick={() => LoadNews(categories[3])}>health</button>
+      <button onClick={() => LoadNews(categories[4])}>science</button>
+    </div>
+  );
+}
