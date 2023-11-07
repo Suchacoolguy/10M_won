@@ -4,7 +4,7 @@
 node_modules/
 /.pnp
 .pnp.js
-.apiKey.js
+apiKey.js
 
 # IDE / Editor
 .vscode/
