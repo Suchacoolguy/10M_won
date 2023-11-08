@@ -58,9 +58,18 @@
     ]
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/material": "^5.14.17",
+    "i": "^0.3.7",
+    "install": "^0.13.0",
     "newsapi": "^2.4.1",
+    "npm": "^10.2.3",
     "react-dom": "^18.2.0",
     "react-qr-code": "^2.0.12",
+    "react-router-dom": "^6.18.0",
+    "styled-components": "^6.1.0",
     "timers": "^0.1.1"
   }
 }

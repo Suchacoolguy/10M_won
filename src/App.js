@@ -1,26 +1,49 @@
 import { useState } from "react";
-import QRCode from "react-qr-code";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { Container } from "@mui/material";
+import theme from "./theme"; // Import the theme you created
+import styled from "styled-components";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import SentenceAnalysis from "./components/SentenceAnalysis";
+import SettingsMenu from "./components/SettingsMenu";
+import NewsLoad from "./components/NewsLoad";
+
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  gap: 20px;
+`;
 
 export default function App() {
-  return (
-    <>
-      <LoadNews />
-      <h1>Hello, world!</h1>
-      <div>
-        <h2 id="title"></h2>
-        <h3 id="description"></h3>
-        <div id="qrcode" />
-      </div>
-      <CategoryBtn />
-      <Send />
-      <Invoke />
-    </>
-  );
-}
+  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>You clicked me {count} times</button>;
+  // 설정 아이콘 클릭 이벤트 핸들러를 수정합니다.
+  const handleSettingsClick = () => {
+    // 설정 메뉴의 표시 상태를 토글합니다.
+    setIsSettingsVisible((prevState) => !prevState);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Header onSettingsClick={handleSettingsClick} />
+        {!isSettingsVisible && (
+          <StyledContainer maxWidth="lg">
+            <Routes>
+              <Route path="/" element={<NewsLoad />} />
+              <Route path="/sentenceanalysis" element={<SentenceAnalysis />} />
+            </Routes>
+            <Footer welfareInfo="Welfare information goes here..." />
+          </StyledContainer>
+        )}
+        {isSettingsVisible && <SettingsMenu />}
+      </Router>
+    </ThemeProvider>
+  );
 }
 
 function Send() {
@@ -38,31 +61,5 @@ function Invoke() {
     >
       Invoke
     </button>
-  );
-}
-
-function LoadNews(arg) {
-  window.ipcRender.invoke("news", arg).then((data) => {
-    console.log(data);
-    document.getElementById("title").innerText = data.articles[1].title;
-    document.getElementById("description").innerText = data.articles[1].description;
-  });
-}
-
-function GenerateQR(url) {
-  return <QRCode value={url}></QRCode>;
-}
-
-function CategoryBtn() {
-  const categories = ["business", "entertainment", "general", "health", "science", "sports", "technology"];
-  console.log(categories);
-  return (
-    <div>
-      <button onClick={() => LoadNews(categories[0])}>Business</button>
-      <button onClick={() => LoadNews(categories[1])}>entertainment</button>
-      <button onClick={() => LoadNews(categories[2])}>general</button>
-      <button onClick={() => LoadNews(categories[3])}>health</button>
-      <button onClick={() => LoadNews(categories[4])}>science</button>
-    </div>
   );
 }
