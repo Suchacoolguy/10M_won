@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Typography, Button, Grid } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
+import studentImg from '../img/student.png';
+import Normal_personImg from "../img/normal.png";
 
 const Header = ({ onSettingsClick }) => {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -12,6 +14,10 @@ const Header = ({ onSettingsClick }) => {
 
         return () => clearInterval(interval);
     }, []);
+
+    // --------------------------------------------------------
+
+
 
     return (
         // style={{padding: '10px 20px', borderBottom: '1px solid #e0e0e0'}}
@@ -30,6 +36,10 @@ const Header = ({ onSettingsClick }) => {
             </Grid>
         </Grid>
     );
+
+    // -----------------------------------------------------------
+
+
 };
 
 export default Header;

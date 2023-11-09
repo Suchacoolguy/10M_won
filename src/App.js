@@ -1,22 +1,49 @@
 import { useState } from "react";
-import { saveSetting, readSetting } from "./saveHandler.js";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import { Container } from "@mui/material";
+import theme from "./theme"; // Import the theme you created
+import styled from "styled-components";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import SentenceAnalysis from "./components/SentenceAnalysis";
+import SettingsMenu from "./components/SettingsMenu";
+import NewsLoad from "./components/NewsLoad";
 
-import * as rssParser from "react-native-rss-parser";
+const StyledContainer = styled(Container)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  gap: 20px;
+`;
 
 export default function App() {
-  return (
-    <>
-      <h1>Hello, world!</h1>
-      <Send />
-      <Invoke />
-      <Receive />
-    </>
-  );
-}
+  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
-function Counter() {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>You clicked me {count} times</button>;
+  // 설정 아이콘 클릭 이벤트 핸들러를 수정합니다.
+  const handleSettingsClick = () => {
+    // 설정 메뉴의 표시 상태를 토글합니다.
+    setIsSettingsVisible((prevState) => !prevState);
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Header onSettingsClick={handleSettingsClick} />
+        {!isSettingsVisible && (
+          <StyledContainer maxWidth="lg">
+            <Routes>
+              <Route path="/" element={<NewsLoad />} />
+              <Route path="/sentenceanalysis" element={<SentenceAnalysis />} />
+            </Routes>
+            <Footer welfareInfo="Welfare information goes here..." />
+          </StyledContainer>
+        )}
+        {isSettingsVisible && <SettingsMenu />}
+      </Router>
+    </ThemeProvider>
+  );
 }
 
 function Send() {
@@ -24,25 +51,15 @@ function Send() {
 }
 
 function Invoke() {
-  return <button onClick={() => window.ipcRender.invoke("sendReceive").then((data) => {
-    console.log(data)
-  })}>Invoke</button>;
+  return (
+    <button
+      onClick={() =>
+        window.ipcRender.invoke("sendReceive").then((data) => {
+          console.log(data);
+        })
+      }
+    >
+      Invoke
+    </button>
+  );
 }
-
-function Receive() {
-  return <button onClick={() => window.ipcRender.receive("news:load", (data) => {
-      data.items.forEach((item) => {
-    console.log(item.title + ":" + item.link);
-  });
-  })}></button>
-}
-
-// function Google() {
-//   const feed = await Parser.parseURL(url);
-
-//   feed.items.array.forEach(element => {
-//     console.log(element.title);
-//   });
-// }
-const url = "https://news.google.com/rss/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=ko&gl=KR&ceid=KR:ko";
-

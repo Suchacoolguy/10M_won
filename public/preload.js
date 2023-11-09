@@ -9,7 +9,7 @@ const ipc = {
     // 메인에서 렌더
     receive: ["receive", "news:load", "news:update", "timezone:update"],
     // 렌더에서 메인 후 다시 렌더
-    sendReceive: ["sendReceive", "setting:change"],
+    sendReceive: ["sendReceive", "news", "setting:change"],
   },
 };
 
@@ -21,6 +21,7 @@ contextBridge.exposeInMainWorld(
       let validChannels = ipc.render.send;
       if (validChannels.includes(channel)) {
         ipcRenderer.send(channel, args);
+        console.log("Send Accept")
       }
     },
     // 메인에서 렌더
@@ -35,6 +36,7 @@ contextBridge.exposeInMainWorld(
     invoke: (channel, args) => {
       let validChannels = ipc.render.sendReceive;
       if (validChannels.includes(channel)) {
+        console.log("Invoke Accept");
         return ipcRenderer.invoke(channel, args);
       }
     },

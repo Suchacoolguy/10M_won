@@ -1,8 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardMedia, Typography, Grid, Button } from '@mui/material';
 import styled from 'styled-components';
-import QRCode from 'qrcode.react';
+import QRCode from "react-qr-code";
 import logoImage from '../img/newslogo/CNN.jpg';  // Import the image
 
 // Styled component for ellipsis
@@ -21,12 +20,12 @@ const BoldHeadline = styled(Typography)`
 `;
 
 
-function NewsCard({ headline, snippet, newsLink }) {
-    const navigate = useNavigate();
-  
-    const goToStudyPage = () => {
-        navigate('/sentenceanalysis', { state: { text: headline + " " + snippet } });
-      };
+const NewsCard = ({ headline, snippet, logoUrl, newsLink }) => {
+
+     // Function to handle button click to open news link
+     const handleReadMoreClick = () => {
+        window.open(newsLink, '_blank'); // '_blank' opens the link in a new tab
+    };
 
     return (
         <Card>
@@ -38,9 +37,10 @@ function NewsCard({ headline, snippet, newsLink }) {
                     <CardContent>
                         <BoldHeadline variant="h4" style={{padding: '10px 20px', borderBottom: '1px solid #e0e0e0'}}>{headline}</BoldHeadline>
                         <EllipsisText variant="body2">{snippet}</EllipsisText>
-                        <Button onClick={goToStudyPage}
+                        <Button 
                             variant="contained" 
                             color="primary" 
+                            onClick={handleReadMoreClick}
                             style={{ marginTop: '8px' }}  // Add some space above the button
                         >
                             Study
